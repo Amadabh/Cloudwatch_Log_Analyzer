@@ -1,0 +1,17 @@
+# Ignore everything in backend
+backend/*
+
+# Allow only these backend files
+!backend/main.py
+!backend/requirements.txt
+
+# Allow frontend completely
+!frontend/
+frontend/**
+
+# General ignores
+__pycache__/
+*.pyc
+.env
+.venv/
+.ipynb_checkpoints/

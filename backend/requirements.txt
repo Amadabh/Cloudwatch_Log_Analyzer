@@ -1,0 +1,7 @@
+langchain 
+langchain_core 
+boto3
+pydantic 
+fastapi
+qdrant-client
+qdrant-client[fastembed]>=1.14.
