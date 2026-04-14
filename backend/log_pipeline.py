@@ -27,7 +27,7 @@ def get_log_groups(logs_client) -> list[str]:
     next_token = None # For pagination (otherwise it goes only for first page)
     
 
-    print("loggroups: ")
+    # print("loggroups: ")
     while True:
         if next_token:
             log_groups = logs_client.describe_log_groups(nextToken= next_token)
@@ -161,7 +161,7 @@ def fetch_all_logs(logs_client, log_group, filter_pattern=''):
                 # cnt +=1
                 # if cnt == 5:
                 #     break
-        break
+        # break
         next_token = response.get('nextToken')
         if not next_token:
             break
@@ -476,36 +476,36 @@ def store_documents(documents):
     return client
 
 log_groups  = get_log_groups(logs_client)
-print(log_groups)
+# print(log_groups)
 log_group = '/aws/lambda/CoverLetterGen'
 text = fetch_all_logs(logs_client, log_group)
-print(text)
+# print(text)
 
 
-def main():
-    # Get all log groups (or specify manually)
-    log_groups = get_log_groups(logs_client)
-    print(f"Found {len(log_groups)} log groups")
+# def main():
+#     # Get all log groups (or specify manually)
+#     log_groups = get_log_groups(logs_client)
+#     print(f"Found {len(log_groups)} log groups")
     
-    # Filter for Lambda logs (or specify your target log group)
-    target_log_group = '/aws/lambda/CoverLetterGen'
+#     # Filter for Lambda logs (or specify your target log group)
+#     target_log_group = '/aws/lambda/CoverLetterGen'
     
-    print(f"\nProcessing: {target_log_group}")
+#     print(f"\nProcessing: {target_log_group}")
     
-    # Fetch all logs with structure
-    all_logs = fetch_all_logs(logs_client, target_log_group)
-    print(f"Fetched {len(all_logs)} log entries")
-    all_logs = assign_request_ids(all_logs)  # <- Add this
-    grouped = group_by_request_id(all_logs)
+#     # Fetch all logs with structure
+#     all_logs = fetch_all_logs(logs_client, target_log_group)
+#     print(f"Fetched {len(all_logs)} log entries")
+#     all_logs = assign_request_ids(all_logs)  # <- Add this
+#     grouped = group_by_request_id(all_logs)
 
-    for req_id in grouped:
-        grouped[req_id] = merge_continuations(grouped[req_id])
+#     for req_id in grouped:
+#         grouped[req_id] = merge_continuations(grouped[req_id])
     
-    documents = create_rag_documents(grouped)
-    print(f"Created {len(documents)} RAG documents\n")
+#     documents = create_rag_documents(grouped)
+#     print(f"Created {len(documents)} RAG documents\n")
 
-    client = store_documents(documents)
-    print(client)
+#     client = store_documents(documents)
+#     print(client)
     
     # Save as JSONL (one JSON object per line)
     # with open("logs.jsonl", "w") as f:
@@ -537,5 +537,5 @@ def main():
 # with open("logs.txt", "w") as f:
 #     f.write(cleaned_text)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

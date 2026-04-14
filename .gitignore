@@ -2,12 +2,14 @@
 backend/*
 
 # Allow only these backend files
-!backend/main.py
+!backend/api.py
+!backend/log_pipeline.py
+!backend/tools.py
+!backend/agent.py
 !backend/requirements.txt
 
 # Allow frontend completely
-!frontend/
-frontend/**
+
 
 # General ignores
 __pycache__/
